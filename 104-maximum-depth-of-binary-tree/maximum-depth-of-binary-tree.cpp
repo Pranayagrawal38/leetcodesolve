@@ -1,3 +1,5 @@
+#include <queue>
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -12,13 +14,27 @@
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
-        //int height;
-        if(root==NULL)
-        return 0;
-        int r=maxDepth(root->right);
-        int l=maxDepth(root->left);
-        return 1+max(l,r);
+        if (root == nullptr)
+            return 0;
 
-        
+        int depth = 0;
+        std::queue<TreeNode*> q;
+        q.push(root);
+
+        while (!q.empty()) {
+            int levelSize = q.size();
+            for (int i = 0; i < levelSize; i++) {
+                TreeNode* temp = q.front();
+                q.pop();
+
+                if (temp->left != nullptr)
+                    q.push(temp->left);
+                if (temp->right != nullptr)
+                    q.push(temp->right);
+            }
+            depth++;
+        }
+
+        return depth;
     }
 };
