@@ -1,29 +1,36 @@
 /**
- * Definition for a binary tree root.
- * struct Treeroot {
+ * Definition for a binary tree node.
+ * struct TreeNode {
  *     int val;
- *     Treeroot *left;
- *     Treeroot *right;
- *     Treeroot() : val(0), left(nullptr), right(nullptr) {}
- *     Treeroot(int x) : val(x), left(nullptr), right(nullptr) {}
- *     Treeroot(int x, Treeroot *left, Treeroot *right) : val(x), left(left), right(right) {}
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
 class Solution {
 public:
-        //Recursive
-        //TC => O(N)
-        //SC => O(N)
-TreeNode* prev=NULL;
+    //Iterative
+    //TC => O(N)
+    //SC => O(N)
     void flatten(TreeNode* root) {
-
-        
         if(root==NULL)
-        return;
-        flatten(root->right);
-        flatten(root->left);
-        root->right=prev;
-        root->left=NULL;
-        prev=root;
+        return ;
+        stack<TreeNode*>st;
+        st.push(root);
+        TreeNode* curr;
+        while(!st.empty()){
+           curr=st.top();
+           st.pop();
+           if(curr->right!=NULL)
+           st.push(curr->right);
+           if(curr->left!=NULL)
+           st.push(curr->left);
+           if(!st.empty()){
+               curr->right=st.top();
+               curr->left=NULL;
+           }
+        }
     }
 };
