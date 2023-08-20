@@ -12,6 +12,8 @@
 class Solution {
 public:
         //Recursive
+        //TC => O(N)
+        //SC => O(N)
 TreeNode* prev=NULL;
     void flatten(TreeNode* root) {
 
