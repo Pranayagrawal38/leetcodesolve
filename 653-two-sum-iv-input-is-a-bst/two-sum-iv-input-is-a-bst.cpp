@@ -11,6 +11,8 @@
  */
 class Solution {
 public:
+// TC => O(N)+O(N)
+// SC => O(N)
 void inordertrav(TreeNode* &root,vector<int>&inorder){
     if(root==NULL)
     return;
